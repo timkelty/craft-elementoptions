@@ -1,3 +1,4 @@
+/* global $ */
 var elementSelect = {
   options: {
     name: 'No name'
@@ -8,9 +9,10 @@ var elementSelect = {
     this.container = container;
     this.$container = $(container);
     this.options = $.extend({}, this.options, this.$container.data('options') || {}, options);
-    this.$childElements = this.$container.find('li.element');
+    this.$childElements = this.$container.find('.ElementSelect-option');
     this.multi = this.options.limit !== 1;
     this.$childElements.each(function() {
+      obj.updateLabel.call(obj, this);
       obj.setStates.call(obj, this);
     });
 
@@ -20,6 +22,13 @@ var elementSelect = {
     });
 
     return this;
+  },
+
+  updateLabel: function(el, state) {
+    var label = $(el).data('label');
+    if (label) {
+      $(el).find('.title').html(label);
+    }
   },
 
   setState: function(el, state) {

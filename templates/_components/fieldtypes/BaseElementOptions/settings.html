@@ -13,5 +13,17 @@
 {% block fieldSettings %}
 	{{ block('limitField') }}
 	{{ block('viewModeField') }}
+	{{ forms.lightswitchField({
+		name: 'showLabel',
+		label: "Show Label",
+		on: settings.showLabel,
+	}) }}
+
+	{{ forms.lightswitchField({
+		name: 'showCheckbox',
+		label: "Show Checkbox",
+		on: settings.showCheckbox,
+	}) }}
+
 	{{ block('optionsField') }}
 {% endblock %}

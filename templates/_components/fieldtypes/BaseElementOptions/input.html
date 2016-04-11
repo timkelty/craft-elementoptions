@@ -4,35 +4,37 @@
 
 {%- set options = (options is defined ? options : []) %}
 {%- set optionName = (name is defined and name ? name~'[]' : null) %}
-{%- set elementTypeClass = 'Asset' %}
 {%- set dataOptions = {
 	limit: settings.limit == '' ? null : settings.limit|round
 } %}
 
-{# {% set inputTemplate = settings.limit == 1 ? '_includes/forms/radio' : '_includes/forms/checkbox' %} #}
 {% set inputTemplate = '_includes/forms/checkbox' %}
 
-<div id="{{ id }}-options" class="elements ElementSelect" data-options="{{ dataOptions|json_encode() }}">
+<div id="{{ id }}-options" class="elements ElementSelect" data-options="{{ dataOptions|json_encode()|e('html_attr') }}">
 	<ul class="thumbsview">
 	{%- for key, option in options %}
-		<li class="element ElementSelect-option">
-			{% if option.assets|length %}
-				{% for element in option.assets %}
+		<li data-label="{{ option.label|e('html_attr') }}" class="ElementSelect-option {% if settings.showCheckbox %}has-checkbox{% endif %} {% if not settings.showLabel %}ElementSelect-option--noLabel{% endif %}">
+			{% if option.element|length %}
+				{% for element in option.element %}
 					{% include "_elements/element" with {
 						size: settings.viewMode,
 					} %}
 				{% endfor %}
 			{% endif %}
-
-			{% include inputTemplate with {
-				label:     option.label,
-				class:		 'ElementSelect-input',
-				id:        (loop.first and id is defined ? id : null),
-				name:      optionName,
-				value:     option.value,
-				checked:   option.selected,
-				autofocus: (autofocus is defined and autofocus and loop.first and not craft.request.isMobileBrowser(true))
-			} only %}
+			{% if settings.showCheckbox %}
+				<div class="checkbox" title="{{ 'Select'|t }}"></div>
+			{% endif %}
+			<div class="hidden">
+				{% include inputTemplate with {
+					label:     option.label,
+					class:		 'ElementSelect-input',
+					id:        (loop.first and id is defined ? id : null),
+					name:      optionName,
+					value:     option.value,
+					checked:   option.selected,
+					autofocus: (autofocus is defined and autofocus and loop.first and not craft.request.isMobileBrowser(true))
+				} only %}
+			</div>
 		</li>
 	{%- endfor %}
 	</ul>

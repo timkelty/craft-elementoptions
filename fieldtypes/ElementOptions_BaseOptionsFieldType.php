@@ -239,6 +239,8 @@ abstract class ElementOptions_BaseOptionsFieldType extends BaseOptionsFieldType
 			'options' => array(AttributeType::Mixed, 'default' => array()),
 			'selectionLabel' => AttributeType::String,
 			'viewMode' => array(AttributeType::String, 'default' => 'large'),
+			'showCheckbox' => array(AttributeType::Bool, 'default' => true),
+			'showLabel' => array(AttributeType::Bool, 'default' => true),
 		);
 	}
 
@@ -282,9 +284,7 @@ abstract class ElementOptions_BaseOptionsFieldType extends BaseOptionsFieldType
 	 */
 	protected function getSupportedViewModes()
 	{
-		$viewModes = array(
-			'list' => Craft::t('List'),
-		);
+		$viewModes = array();
 
 		if ($this->allowLargeThumbsView)
 		{

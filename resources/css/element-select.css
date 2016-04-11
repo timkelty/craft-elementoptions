@@ -1,7 +1,3 @@
-.ElementSelect .element.large.hasthumb .label {
-  display: none;
-}
-
 .ElementSelect-option,
 .ElementSelect-option * {
   cursor: pointer;
@@ -10,4 +6,16 @@
 .ElementSelect-option.disabled,
 .ElementSelect-option.disabled * {
   cursor: default;
+}
+
+.ElementSelect-option--noLabel:not(.has-checkbox) .title  {
+  display: none;
+}
+
+.ElementSelect-option--noLabel:not(.has-checkbox) .element.large.hasthumb {
+  padding: 100px 0 0;
+}
+
+.ElementSelect-option--noLabel .title  {
+  visibility: hidden;
 }

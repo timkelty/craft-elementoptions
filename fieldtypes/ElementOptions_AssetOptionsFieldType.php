@@ -28,6 +28,6 @@ class ElementOptions_AssetOptionsFieldType extends ElementOptions_BaseOptionsFie
 	 */
 	public function getName()
 	{
-		return Craft::t('Asset Options');
+		return Craft::t('Element Options: Assets');
 	}
 }

@@ -26,8 +26,8 @@ class ElementOptions_UserOptionsFieldType extends ElementOptions_BaseOptionsFiel
 	 *
 	 * @return string
 	 */
-	public function getName()
-	{
-		return Craft::t('User Options');
-	}
+	 public function getName()
+ 	{
+ 		return Craft::t('Element Options: Users');
+ 	}
 }
