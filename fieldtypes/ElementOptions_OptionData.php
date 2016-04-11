@@ -35,9 +35,11 @@ class ElementOptions_OptionData extends OptionData
 	 */
 	public function __construct($label, $value, $selected, $elementType, $elementIds)
 	{
-		$this->label    = $label;
-		$this->value    = $value;
-		$this->element   = $this->getElementCriteria($elementType, $elementIds);
+		$criteria = $this->getElementCriteria($elementType, $elementIds);
+		$obj = array('element' => $criteria->first());
+		$this->label    = craft()->templates->renderObjectTemplate($label, $obj);
+		$this->value    = craft()->templates->renderObjectTemplate($value, $obj);
+		$this->element  = $criteria;
 		$this->selected = $selected;
 	}
 
