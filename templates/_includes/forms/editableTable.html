@@ -54,7 +54,7 @@
 {% if not static and (initJs is not defined or initJs) %}
 	{% set elementSelectHtml %}{% include "_includes/forms/elementSelect" with elementSelect only %}{% endset %}
 	{% includejs %}
-		new Craft.ElementSelectEditableTable(
+		new Craft.EditableTable(
 			"{{ id   | namespaceInputId   | e('js') }}",
 			"{{ name | namespaceInputName | e('js') }}",
 			{{ cols|json_encode|raw }},
