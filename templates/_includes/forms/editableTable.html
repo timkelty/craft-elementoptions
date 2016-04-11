@@ -21,15 +21,12 @@
 					{% set cellName = name~'['~rowId~']['~colId~']' %}
 					{% set value = (row[colId] is defined ? row[colId] : null) %}
 					{% set textual = (col.type in ['singleline','multiline','number']) %}
-					{% set elements = value ? craft.assets({
-						id: value
-					}) : null %}
 					<td class="{% if textual %}textual{% endif %} {% if col.class is defined %}{{ col.class }}{% endif %}"{% if col.width is defined %} width="{{ col.width }}"{% endif %}>
-						{%- if col.type == 'assets' -%}
+						{%- if col.type == 'elementSelect' -%}
 							{% include "_includes/forms/elementSelect" with elementSelect|merge({
 								id: rowId~'-'~col.type,
 								name: cellName,
-								elements: elements,
+								elements: value and elementMethod ? attribute(craft, elementMethod, [{ id: value}]) : null,
 							}) only %}
 						{%- elseif col.type == 'checkbox' -%}
 							<input type="hidden" name="{{ cellName }}">
@@ -72,7 +69,7 @@
 					new {{ elementSelect.jsClass }}($.extend({{ elementSelect|json_encode|raw }}, {
 						id: id,
 						name: name,
-						elementType: "{{ elementSelect.elementType.getClassHandle() }}"
+						elementType: "{{ type }}"
 					}));
 				}
 			});

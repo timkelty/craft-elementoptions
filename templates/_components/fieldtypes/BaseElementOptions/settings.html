@@ -2,9 +2,12 @@
 {% import "_includes/forms" as forms %}
 
 {% block optionsField %}
-	{% set config = optionsSettings|merge(settings) %}
-	{% set input %}{% include 'elementoptions/_includes/forms/editableTable' with config only %}{% endset %}
-	{{ forms.field(optionsSettings, input)}}
+	{% set input %}{% include 'elementoptions/_includes/forms/editableTable' %}{% endset %}
+	{{ forms.field({
+		'id'          : id,
+		'label'       : label,
+		'instructions': instructions,
+	}, input)}}
 {% endblock %}
 
 {% block fieldSettings %}
