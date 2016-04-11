@@ -1,0 +1,14 @@
+{% extends '_components/fieldtypes/elementfieldsettings' %}
+{% import "_includes/forms" as forms %}
+
+{% block optionsField %}
+	{% set config = optionsSettings|merge(settings) %}
+	{% set input %}{% include 'elementoptions/_includes/forms/editableTable' with config only %}{% endset %}
+	{{ forms.field(optionsSettings, input)}}
+{% endblock %}
+
+{% block fieldSettings %}
+	{{ block('limitField') }}
+	{{ block('viewModeField') }}
+	{{ block('optionsField') }}
+{% endblock %}

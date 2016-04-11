@@ -1,0 +1,14 @@
+{
+    "name": "timkelty/elementoptions'",
+    "description": "This is a generic Craft CMS plugin",
+    "authors": [
+		{
+			"name": "Tim Kelty",
+			"homepage": "http://fusionary.com/"
+		}
+	],
+    "type": "craft-plugin",
+    "require": {
+        "composer/installers": "~1.0"
+    }
+}

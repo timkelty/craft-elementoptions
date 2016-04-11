@@ -1,0 +1,96 @@
+{% import "_includes/forms" as forms %}
+
+{%- set static = (static is defined ? static : false) %}
+{%- set cols = (cols is defined ? cols : []) %}
+{%- set rows = (rows is defined ? rows : []) -%}
+
+<table id="{{ id }}" class="shadow-box editable">
+	<thead>
+		<tr>
+			{% for col in cols %}
+				<th scope="col" class="header">{{ col.heading ? col.heading : ' ' }}</th>
+			{% endfor %}
+			{% if not static %}
+				<th class="header" colspan="2"></th>
+			{% endif %}
+		</tr>
+	</thead>
+	<tbody>
+		{% for rowId, row in rows %}
+			<tr data-id="{{ rowId }}">
+				{% for colId, col in cols %}
+					{% set cellName = name~'['~rowId~']['~colId~']' %}
+					{% set value = (row[colId] is defined ? row[colId] : null) %}
+					{% set textual = (col.type in ['singleline','multiline','number']) %}
+					{% set elements = value ? craft.assets({
+						id: value
+					}) : null %}
+					<td class="{% if textual %}textual{% endif %} {% if col.class is defined %}{{ col.class }}{% endif %}"{% if col.width is defined %} width="{{ col.width }}"{% endif %}>
+						{%- if col.type == 'assets' -%}
+							{% include "_includes/forms/elementSelect" with {
+								id: rowId~'-'~col.type,
+								name: cellName,
+								elementType: craft.elements.getElementType('Asset'),
+								criteria: craft.assets.kind('image'),
+								limit: 1,
+								elements: elements,
+							} only %}
+						{%- elseif col.type == 'checkbox' -%}
+							<input type="hidden" name="{{ cellName }}">
+							<input type="checkbox" name="{{ cellName }}" value="1"{% if value %} checked{% endif %}{% if static %} disabled{% endif %}>
+						{%- else -%}
+							<textarea name="{{ cellName }}" rows="1"{% if static %} disabled{% endif %}>{{ value }}</textarea>
+						{%- endif -%}
+					</td>
+				{% endfor %}
+				{% if not static %}
+					<td class="thin action"><a class="move icon" title="{{ 'Reorder'|t }}"></a></td>
+					<td class="thin action"><a class="delete icon" title="{{ 'Delete'|t }}"></a></td>
+				{% endif %}
+			</tr>
+		{% endfor %}
+	</tbody>
+</table>
+{% if not static %}
+	<div class="btn add icon">{{ addRowLabel is defined ? addRowLabel : "Add a row"|t }}</div>
+{% endif %}
+
+{% if not static and (initJs is not defined or initJs) %}
+	{% set elementSelectConfig = {
+			id: '__ROW__-assets'|namespaceInputId,
+			name: '',
+			elementType: craft.elements.getElementType('Asset'),
+			criteria: craft.assets.kind('image'),
+			limit: 1,
+			elements: [],
+	} %}
+
+	{% set elementSelectHtml %}
+		{% include "_includes/forms/elementSelect" with elementSelectConfig only %}
+	{% endset %}
+
+	{% includejs %}
+		new Craft.ElementSelectEditableTable(
+			"{{ id   | namespaceInputId   | e('js') }}",
+			"{{ name | namespaceInputName | e('js') }}",
+			{{ cols|json_encode|raw }},
+			{
+				onAddRow: function($tr) {
+					var $col = $tr.find('td.has-elementselect');
+					var rowId = $tr.data('id');
+					var $input = $col.find(':input').addClass('hidden');
+					var name = $input.attr('name');
+					var html = "{{ elementSelectHtml | e('js') }}";
+					html = html.replace(/__ROW__/g, rowId);
+					var id = $(html).attr('id');
+					$col.append(html);
+
+					new Craft.BaseElementSelectInput($.extend({{ elementSelectConfig|json_encode|raw }}, {
+						id: id,
+						name: name,
+						elementType: 'Asset',
+					}));
+				}
+			});
+	{% endincludejs %}
+{% endif %}
