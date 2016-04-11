@@ -50,8 +50,8 @@ class ElementOptions_AssetOptionsFieldType extends BaseOptionsFieldType
 		$id = craft()->templates->formatInputId($name);
 		$namespacedId = craft()->templates->namespaceInputId($id);
 
-		craft()->templates->includeCssResource('elementoptions/css/fieldtypes/BaseElementOptions/input.css');
-		craft()->templates->includeJsResource('elementoptions/js/fieldtypes/BaseElementOptions/input.js');
+		craft()->templates->includeCssResource('elementoptions/css/element-select.css');
+		craft()->templates->includeJsResource('elementoptions/js/element-select.js');
 		craft()->templates->includeJs("$('#{$namespacedId}-options').elementSelect();");
 
 		return craft()->templates->render('elementoptions/_components/fieldtypes/BaseElementOptions/input', array(
