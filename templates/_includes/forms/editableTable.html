@@ -1,5 +1,4 @@
 {% import "_includes/forms" as forms %}
-
 {%- set static = (static is defined ? static : false) %}
 {%- set cols = (cols is defined ? cols : []) %}
 {%- set rows = (rows is defined ? rows : []) -%}
@@ -27,14 +26,11 @@
 					}) : null %}
 					<td class="{% if textual %}textual{% endif %} {% if col.class is defined %}{{ col.class }}{% endif %}"{% if col.width is defined %} width="{{ col.width }}"{% endif %}>
 						{%- if col.type == 'assets' -%}
-							{% include "_includes/forms/elementSelect" with {
+							{% include "_includes/forms/elementSelect" with elementSelect|merge({
 								id: rowId~'-'~col.type,
 								name: cellName,
-								elementType: craft.elements.getElementType('Asset'),
-								criteria: craft.assets.kind('image'),
-								limit: 1,
 								elements: elements,
-							} only %}
+							}) only %}
 						{%- elseif col.type == 'checkbox' -%}
 							<input type="hidden" name="{{ cellName }}">
 							<input type="checkbox" name="{{ cellName }}" value="1"{% if value %} checked{% endif %}{% if static %} disabled{% endif %}>
@@ -56,19 +52,7 @@
 {% endif %}
 
 {% if not static and (initJs is not defined or initJs) %}
-	{% set elementSelectConfig = {
-			id: '__ROW__-assets'|namespaceInputId,
-			name: '',
-			elementType: craft.elements.getElementType('Asset'),
-			criteria: craft.assets.kind('image'),
-			limit: 1,
-			elements: [],
-	} %}
-
-	{% set elementSelectHtml %}
-		{% include "_includes/forms/elementSelect" with elementSelectConfig only %}
-	{% endset %}
-
+	{% set elementSelectHtml %}{% include "_includes/forms/elementSelect" with elementSelect only %}{% endset %}
 	{% includejs %}
 		new Craft.ElementSelectEditableTable(
 			"{{ id   | namespaceInputId   | e('js') }}",
@@ -85,10 +69,10 @@
 					var id = $(html).attr('id');
 					$col.append(html);
 
-					new Craft.BaseElementSelectInput($.extend({{ elementSelectConfig|json_encode|raw }}, {
+					new {{ elementSelect.jsClass }}($.extend({{ elementSelect|json_encode|raw }}, {
 						id: id,
 						name: name,
-						elementType: 'Asset',
+						elementType: "{{ elementSelect.elementType.getClassHandle() }}"
 					}));
 				}
 			});

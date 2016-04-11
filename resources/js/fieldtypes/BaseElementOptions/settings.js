@@ -1,72 +1,37 @@
-Craft.ElementSelectEditableTable = Craft.EditableTable.extend({
-});
+/* globals Craft, jQuery */
 
-// {
-//   getRowHtml: function(rowId, columns, baseName, values)  {
-//
-//     return '';
-//     // var rowHtml = Craft.EditableTable.getRowHtml(rowId, columns, baseName, values);
-//     // console.log($(rowHtml));
-//     // $(rowHtml).find('.has-elementselect').html('');
-//     // for (var colId in columns)    {
-//     //     var col = columns[colId];
-//     //     var name = baseName + '[' + rowId + '][' + colId + ']';
-//     //
-//     //     if (col.type == 'assets') {
-//     //       // console.log(colId);
-//     //     }
-//     // }
-//     //
-//     //
-//     // return rowHtml;
-//   },
-// });
+(function($) {
+  Craft.ElementSelectEditableTable = Craft.EditableTable.extend({
+    initElementSelect: function($tr, elementSelect) {
+      var $col = $tr.find('td.has-elementselect');
+      var rowId = $tr.data('id');
+      var $input = $col.find(':input').addClass('hidden');
+      var name = $input.attr('name');
+      var html = elementSelect.bodyHtml;
+      html = html.replace(/__ROW__/g, rowId);
+      var id = $(html).attr('id');
+      $col.append(html);
 
+      new Craft.BaseElementSelectInput($.extend(elementSelect.config, {
+        id: id,
+        name: name,
+        elementType: 'Asset',
+      }));
+    },
+    getRowHtml: function(rowId, columns, baseName, values)  {
+      var rowHtml = Craft.EditableTable.getRowHtml(rowId, columns, baseName, values);
+      $(rowHtml).find('.has-elementselect').html('');
 
-// Craft.ElementSelectEditableTable.initElementSelect = function($tr) {
-//   console.log($tr);
-//   new Craft.BaseElementSelectInput({
-//     id: 'types-AssetsSelect_AssetsSelect-4-assets'
-//   });
-// };
-// Craft.ElementSelectEditableTable.getRowHtml = function(rowId, columns, baseName, values)  {
-//   var rowHtml = Craft.EditableTable.getRowHtml(rowId, columns, baseName, values);
-//   return rowHtml;
-//
-  // var rowHtml = '<tr data-id="' + rowId + '">';
-  //
-  // for (var colId in columns)    {
-  //   var col = columns[colId],
-  //   name = baseName + '[' + rowId + '][' + colId + ']',
-  //   value = (typeof values[colId] != 'undefined' ? values[colId] : ''),
-  //   textual = Craft.inArray(col.type, Craft.EditableTable.textualColTypes);
-  //
-  //   rowHtml += '<td class="' + (textual ? 'textual' : '') + ' ' + (typeof col['class'] != 'undefined' ? col['class'] : '') + '"' +
-  //   (typeof col['width'] != 'undefined' ? ' width="' + col['width'] + '"' : '') +
-  //   '>';
-  //
-  //   switch (col.type)      {
-  //     case 'checkbox': {
-  //       rowHtml += '<input type="hidden" name="' + name + '">' +
-  //       '<input type="checkbox" name="' + name + '" value="1"' + (value ? ' checked' : '') + '>';
-  //
-  //       break;
-  //     }
-  //     case 'assets': {
-  //       rowHtml += ''
-  //       break;
-  //     }
-  //
-  //     default: {
-  //       rowHtml += '<textarea name="' + name + '" rows="1">' + value + '</textarea>';
-  //     }
-  //   }
-  //
-  //   rowHtml += '</td>';
-  // }
-  //
-  // rowHtml += '<td class="thin action"><a class="move icon" title="' + Craft.t('Reorder') + '"></a></td>' +
-  // '<td class="thin action"><a class="delete icon" title="' + Craft.t('Delete') + '"></a></td>' +
-  // '</tr>';
+      for (var colId in columns)    {
+        var col = columns[colId];
+        var name = baseName + '[' + rowId + '][' + colId + ']';
 
-// };
+        if (col.type == 'assets') {
+          console.log(colId);
+        }
+      }
+
+      return rowHtml;
+    }
+  });
+})(jQuery);

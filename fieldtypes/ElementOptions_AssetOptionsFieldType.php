@@ -15,6 +15,8 @@ class ElementOptions_AssetOptionsFieldType extends BaseOptionsFieldType
 	// =========================================================================
 	protected $multi = true;
 	protected $allowLargeThumbsView = true;
+	protected $elementType = 'Asset';
+	protected $inputJsClass = 'Craft.AssetSelectInput';
 
 	// Public Methods
 	// =========================================================================
@@ -119,11 +121,33 @@ class ElementOptions_AssetOptionsFieldType extends BaseOptionsFieldType
 					),
 				),
 				'rows' => $options,
+				'elementSelect' => $this->getElementSelectTemplateVariables(),
 			),
 		);
 		craft()->templates->includeJsResource('elementoptions/js/fieldtypes/BaseElementOptions/settings.js');
 
 		return craft()->templates->render('elementoptions/_components/fieldtypes/BaseElementOptions/settings', $templateVars);
+	}
+
+	protected function getElementSelectTemplateVariables($criteria = false)
+	{
+		if (!($criteria instanceof ElementCriteriaModel))
+		{
+			$criteria = craft()->elements->getCriteria($this->elementType);
+			$criteria->id = false;
+		}
+
+		$criteria->status = null;
+		$criteria->localeEnabled = null;
+
+		return array(
+			'jsClass'            => $this->inputJsClass,
+			'elementType'        => craft()->elements->getElementType($this->elementType),
+			'id'                 => craft()->templates->namespaceInputId('__ROW__-assets'),
+			'name' 				 => '',
+			'criteria'           => $criteria,
+			'limit'              => 1,
+		);
 	}
 
 	/**
