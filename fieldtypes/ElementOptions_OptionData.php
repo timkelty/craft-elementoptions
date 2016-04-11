@@ -19,7 +19,7 @@ class ElementOptions_OptionData extends OptionData
 	/**
 	 * @var
 	 */
-	public $assets;
+	public $element;
 
 	// Public Methods
 	// =========================================================================
@@ -33,11 +33,11 @@ class ElementOptions_OptionData extends OptionData
 	 *
 	 * @return OptionData
 	 */
-	public function __construct($label, $value, $assets, $selected)
+	public function __construct($label, $value, $selected, $elementType, $elementIds)
 	{
 		$this->label    = $label;
 		$this->value    = $value;
-		$this->assets   = $this->getAssetsCriteria($assets);
+		$this->element   = $this->getElementCriteria($elementType, $elementIds);
 		$this->selected = $selected;
 	}
 
@@ -46,10 +46,10 @@ class ElementOptions_OptionData extends OptionData
 	 *
 	 * @return array|null
 	 */
-	public function getAssetsCriteria($ids)
+	public function getElementCriteria($elementType, $elementIds)
 	{
-		$criteria = craft()->elements->getCriteria(ElementType::Asset);
-		$criteria->id = $ids;
+		$criteria = craft()->elements->getCriteria($elementType);
+		$criteria->id = $elementIds;
 		return $criteria;
 	}
 

@@ -155,7 +155,7 @@ abstract class ElementOptions_BaseOptionsFieldType extends BaseOptionsFieldType
 				foreach ($value as &$val)
 				{
 					$data = $this->getOptionData($val);
-					$val = new ElementOptions_OptionData($data['label'], $val, $data['element'], true);
+					$val = new ElementOptions_OptionData($data['label'], $val, true, $this->elementType, $data['element']);
 				}
 			}
 			else
@@ -169,7 +169,7 @@ abstract class ElementOptions_BaseOptionsFieldType extends BaseOptionsFieldType
 		{
 			// Convert the value to a ElementOptions_SingleOptionFieldData object
 			$data = $this->getOptionData($value);
-			$value = new ElementOptions_SingleOptionFieldData($data['label'], $value, $data['element'], true);
+			$value = new ElementOptions_SingleOptionFieldData($data['label'], $value, true, $this->elementType, $data['element']);
 		}
 
 		$options = array();
@@ -177,7 +177,7 @@ abstract class ElementOptions_BaseOptionsFieldType extends BaseOptionsFieldType
 		foreach ($this->getOptions() as $option)
 		{
 			$selected = in_array($option['value'], $selectedValues);
-			$options[] = new ElementOptions_OptionData($option['label'], $option['value'], $option['element'], $selected);
+			$options[] = new ElementOptions_OptionData($option['label'], $option['value'], $selected, $this->elementType, $data['element']);
 		}
 
 		$value->setOptions($options);
