@@ -1,31 +1,34 @@
-/* global $ */
-var elementSelect = {
-  options: {
-    name: 'No name'
+/* global window, jQuery */
+var ElementSelect = function(elem, options) {
+    this.elem = elem;
+    this.$elem = $(elem);
+    this.options = options;
+    this.metadata = this.$elem.data('options');
+  };
+
+ElementSelect.prototype = {
+  defaults: {
+    limit: 1
   },
-
-  init: function(options, container) {
-    var obj = this;
-    this.container = container;
-    this.$container = $(container);
-    this.options = $.extend({}, this.options, this.$container.data('options') || {}, options);
-    this.$childElements = this.$container.find('.ElementSelect-option');
-    this.multi = this.options.limit !== 1;
+  init: function() {
+    var instance = this;
+    this.config = $.extend({}, this.defaults, this.options, this.metadata);
+    this.multi = this.config.limit !== 1;
+    this.$childElements = this.$elem.find('.ElementSelect-option');
     this.$childElements.each(function() {
-      obj.updateLabel.call(obj, this);
-      obj.setStates.call(obj, this);
+      instance.updateLabel.call(instance, this);
+      instance.setStates.call(instance, this);
     });
-
     this.$childElements.on('click', function(event) {
       event.preventDefault();
-      obj.toggleState.call(obj, this);
+      instance.toggleState.call(instance, this);
     });
 
     return this;
   },
-
   updateLabel: function(el, state) {
     var label = $(el).data('label');
+
     if (label) {
       $(el).find('.title').html(label);
     }
@@ -46,7 +49,7 @@ var elementSelect = {
   },
 
   toggleDisabled: function(state) {
-    if (this.options.limit !== null && this.selected().length >= this.options.limit) {
+    if (this.config.limit !== null && this.selected().length >= this.config.limit) {
       this.notSelected().addClass('disabled');
     } else if (!state) {
       this.notSelected().removeClass('disabled');
@@ -61,52 +64,48 @@ var elementSelect = {
     this.setStates(el, !this.isSelected(el));
 
     if (!this.multi) {
-      var obj = this;
+      var instance = this;
       this.$childElements
       .filter(function() {
         return this !== el;
       })
       .each(function() {
-        obj.setState(this, false);
+        instance.setState(this, false);
       });
     }
   },
 
   selected: function() {
-    var obj = this;
+    var instance = this;
 
     return this.$childElements.filter(function() {
-      return obj.isSelected(this);
+      return instance.isSelected(this);
     });
   },
 
   notSelected: function() {
-    var obj = this;
+    var instance = this;
 
     return this.$childElements.not(function() {
-      return obj.isSelected(this);
+      return instance.isSelected(this);
     });
   },
 
   canToggle: function(el) {
-    return this.isSelected(el) || !this.multi || (this.options.limit === null || this.selected().length < this.options.limit);
+    return this.isSelected(el) || !this.multi || (this.config.limit === null || this.selected().length < this.config.limit);
   },
 
   isSelected: function(el) {
     return $(el).find('.ElementSelect-input').prop('checked');
-  },
+  }
 };
 
-// Create a plugin based on a defined object
-$.plugin = function(name, object) {
-  $.fn[name] = function(options) {
-    return this.each(function() {
-      if (!$.data(this, name)) {
-        $.data(this, name, Object.create(object).init(options, this));
-      }
-    });
-  };
+ElementSelect.defaults = ElementSelect.prototype.defaults;
+
+$.fn.elementSelect = function(options) {
+  return this.each(function() {
+    new ElementSelect(this, options).init();
+  });
 };
 
-// jQuery plugin
-$.plugin('elementSelect', elementSelect);
+window.ElementSelect = ElementSelect;
