@@ -9,18 +9,11 @@
 } %}
 
 <div id="{{ id }}-options" class="elements ElementSelect" data-options="{{ dataOptions|json_encode()|e('html_attr') }}">
-	<ul class="thumbsview">
+	<ul class="{{ settings.viewMode == 'large' ? 'thumbsview' : ''}}">
 	{%- for key, option in options %}
 		{%- set optionLabel = (option.label is defined ? option.label : option) %}
 		{%- set optionValue = (option.value is defined ? option.value : key) -%}
-		<li data-label="{{ option.label|e('html_attr') }}" class="ElementSelect-option {% if settings.showCheckbox %}has-checkbox{% endif %} {% if not settings.showLabel %}ElementSelect-option--noLabel{% endif %}">
-			{% if option.element|length %}
-				{% for element in option.element %}
-					{% include "_elements/element" with {
-						size: settings.viewMode,
-					} %}
-				{% endfor %}
-			{% endif %}
+		{% set checkbox %}
 			{% if settings.showCheckbox %}
 				<div class="checkbox" title="{{ 'Select'|t }}"></div>
 			{% endif %}
@@ -35,6 +28,19 @@
 					autofocus: (autofocus is defined and autofocus and loop.first and not craft.request.isMobileBrowser(true))
 				} only %}
 			</div>
+		{% endset %}
+		{% set elementSelect %}
+			{% if option.element|length %}
+				{% for element in option.element %}
+					{% include "_elements/element" with {
+						size: settings.viewMode,
+					} %}
+				{% endfor %}
+			{% endif %}
+		{% endset %}
+		<li data-label="{{ option.label|e('html_attr') }}" class="ElementSelect-option {% if settings.showCheckbox %}has-checkbox{% endif %} {% if not settings.showLabel %}ElementSelect-option--noLabel{% endif %}">
+			{{ checkbox }}
+			{{ elementSelect }}
 		</li>
 	{%- endfor %}
 	</ul>

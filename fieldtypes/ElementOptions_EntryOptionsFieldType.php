@@ -9,12 +9,11 @@
 
 namespace Craft;
 
-class ElementOptions_UserOptionsFieldType extends ElementOptions_BaseOptionsFieldType
+class ElementOptions_EntryOptionsFieldType extends ElementOptions_BaseOptionsFieldType
 {
 	// Properties
 	// =========================================================================
-	protected $allowLargeThumbsView = true;
-	protected $elementType = 'User';
+	protected $elementType = 'Entry';
 
 	// Public Methods
 	// =========================================================================
@@ -24,8 +23,8 @@ class ElementOptions_UserOptionsFieldType extends ElementOptions_BaseOptionsFiel
 	 *
 	 * @return string
 	 */
-	 public function getName()
- 	{
- 		return Craft::t('Element Options: Users');
- 	}
+	public function getName()
+	{
+		return Craft::t('Element Options: Entries');
+	}
 }

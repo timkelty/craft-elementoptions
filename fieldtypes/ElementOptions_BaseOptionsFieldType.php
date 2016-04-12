@@ -14,7 +14,8 @@ abstract class ElementOptions_BaseOptionsFieldType extends BaseOptionsFieldType
 	// Properties
 	// =========================================================================
 	protected $multi = true;
-	protected $allowLargeThumbsView = true;
+	protected $allowLargeThumbsView = false;
+	protected $inputJsClass = 'Craft.BaseElementSelectInput';
 
 	// Public Methods
 	// =========================================================================
@@ -98,7 +99,7 @@ abstract class ElementOptions_BaseOptionsFieldType extends BaseOptionsFieldType
 					'class'        => 'code'
 				),
 				'element' => array(
-					'heading'      => $this->getName(),
+					'heading'      => $this->elementType,
 					'type'         => 'elementSelect',
 					'class'		   => 'has-elementselect'
 				),
@@ -255,7 +256,7 @@ abstract class ElementOptions_BaseOptionsFieldType extends BaseOptionsFieldType
 			'limit' => array(AttributeType::Number, 'min' => 0),
 			'options' => array(AttributeType::Mixed, 'default' => array()),
 			'selectionLabel' => AttributeType::String,
-			'viewMode' => array(AttributeType::String, 'default' => 'large'),
+			'viewMode' => array(AttributeType::String),
 			'showCheckbox' => array(AttributeType::Bool, 'default' => true),
 			'showLabel' => array(AttributeType::Bool, 'default' => true),
 		);
@@ -301,7 +302,9 @@ abstract class ElementOptions_BaseOptionsFieldType extends BaseOptionsFieldType
 	 */
 	protected function getSupportedViewModes()
 	{
-		$viewModes = array();
+		$viewModes = array(
+			'list' => Craft::t('List'),
+		);
 
 		if ($this->allowLargeThumbsView)
 		{
