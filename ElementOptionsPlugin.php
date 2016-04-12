@@ -1,19 +1,5 @@
 <?php
 /**
- * ElementOptions plugin for Craft CMS
- *
- * This is a generic Craft CMS plugin
- *
- * --snip--
- * Craft plugins are very much like little applications in and of themselves. We’ve made it as simple as we can,
- * but the training wheels are off. A little prior knowledge is going to be required to write a plugin.
- *
- * For the purposes of the plugin docs, we’re going to assume that you know PHP and SQL, as well as some semi-
- * advanced concepts like object-oriented programming and PHP namespaces.
- *
- * https://craftcms.com/docs/plugins/introduction
- * --snip--
- *
  * @author    Tim Kelty
  * @copyright Copyright (c) 2016 Tim Kelty
  * @link      http://fusionary.com/
@@ -27,14 +13,6 @@ class ElementOptionsPlugin extends BasePlugin
 {
     /**
      * Called after the plugin class is instantiated; do any one-time initialization here such as hooks and events:
-     *
-     * craft()->on('entries.saveEntry', function(Event $event) {
-     *    // ...
-     * });
-     *
-     * or loading any third party Composer packages via:
-     *
-     * require_once __DIR__ . '/vendor/autoload.php';
      *
      * @return mixed
      */
@@ -138,37 +116,5 @@ class ElementOptionsPlugin extends BasePlugin
     public function hasCpSection()
     {
         return false;
-    }
-
-    /**
-     * Called right before your plugin’s row gets stored in the plugins database table, and tables have been created
-     * for it based on its records.
-     */
-    public function onBeforeInstall()
-    {
-    }
-
-    /**
-     * Called right after your plugin’s row has been stored in the plugins database table, and tables have been
-     * created for it based on its records.
-     */
-    public function onAfterInstall()
-    {
-    }
-
-    /**
-     * Called right before your plugin’s record-based tables have been deleted, and its row in the plugins table
-     * has been deleted.
-     */
-    public function onBeforeUninstall()
-    {
-    }
-
-    /**
-     * Called right after your plugin’s record-based tables have been deleted, and its row in the plugins table
-     * has been deleted.
-     */
-    public function onAfterUninstall()
-    {
     }
 }

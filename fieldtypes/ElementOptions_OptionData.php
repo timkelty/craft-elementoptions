@@ -1,16 +1,14 @@
 <?php
+/**
+ * @author    Tim Kelty
+ * @copyright Copyright (c) 2016 Tim Kelty
+ * @link      http://fusionary.com/
+ * @package   ElementOptions
+ * @since     1.0.0
+ */
+
 namespace Craft;
 
-/**
- * Class OptionData
- *
- * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
- * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://craftcms.com/license Craft License Agreement
- * @see       http://craftcms.com
- * @package   craft.app.fieldtypes
- * @since     1.0
- */
 class ElementOptions_OptionData extends OptionData
 {
 	// Properties

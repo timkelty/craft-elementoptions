@@ -1,16 +1,13 @@
 <?php
-namespace Craft;
-
 /**
- * Class AssetsSelect_SingleOptionFieldData
- *
- * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
- * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://craftcms.com/license Craft License Agreement
- * @see       http://craftcms.com
- * @package   craft.app.fieldtypes
- * @since     1.0
+ * @author    Tim Kelty
+ * @copyright Copyright (c) 2016 Tim Kelty
+ * @link      http://fusionary.com/
+ * @package   ElementOptions
+ * @since     1.0.0
  */
+
+namespace Craft;
 
 class ElementOptions_SingleOptionFieldData extends ElementOptions_OptionData
 {
