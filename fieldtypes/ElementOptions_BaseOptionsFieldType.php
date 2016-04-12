@@ -45,6 +45,9 @@ abstract class ElementOptions_BaseOptionsFieldType extends BaseOptionsFieldType
 		craft()->templates->includeJsResource('elementoptions/js/element-select.js');
 		craft()->templates->includeJs("$('#{$namespacedId}-options').elementSelect();");
 
+		foreach ($options as &$option) {
+			$option = new ElementOptions_OptionData($option['label'], $option['value'], false, $option['element']);
+		}
 		return craft()->templates->render('elementoptions/_components/fieldtypes/BaseElementOptions/input', array(
 			'id'	       => $id,
 			'name'         => $name,
@@ -117,10 +120,11 @@ abstract class ElementOptions_BaseOptionsFieldType extends BaseOptionsFieldType
 
 	protected function getOptions()
 	{
-		$options = parent::getOptions();
-
-		foreach ($options as &$option) {
-			$option['element'] = $this->getElementCriteria($option['element']);
+		$options = array();
+		foreach (parent::getOptions() as $option) {
+			$elementCriteria = $this->getElementCriteria($option['element']);
+			$option['element'] = $elementCriteria;
+			$options[] = $option;
 		}
 
 		return $options;
