@@ -8,14 +8,16 @@
   cursor: default;
 }
 
-.ElementSelect-option--noLabel:not(.has-checkbox) .title  {
+.ElementSelect-option--noLabel:not(.has-checkbox) .title,
+.ElementSelect-option--noLabel:not(.has-checkbox) .status  {
   display: none;
+}
+
+.ElementSelect-option--noLabel .title,
+.ElementSelect-option--noLabel .status  {
+  visibility: hidden;
 }
 
 .ElementSelect-option--noLabel:not(.has-checkbox) .element.large.hasthumb {
   padding: 100px 0 0;
-}
-
-.ElementSelect-option--noLabel .title  {
-  visibility: hidden;
 }
