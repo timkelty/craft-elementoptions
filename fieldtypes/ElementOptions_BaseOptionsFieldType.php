@@ -47,7 +47,7 @@ abstract class ElementOptions_BaseOptionsFieldType extends BaseOptionsFieldType
 		return craft()->templates->render('elementoptions/_components/fieldtypes/BaseElementOptions/input', array(
 			'id'	       => $id,
 			'name'         => $name,
-			'options'      => $values->getOptions(),
+			'options'      => $options,
 			'values'       => $values,
 			'settings'     => $this->getSettings(),
 		));
@@ -79,7 +79,6 @@ abstract class ElementOptions_BaseOptionsFieldType extends BaseOptionsFieldType
 			'allowLimit'        => true,
 			'viewModeFieldHtml' => $this->getViewModeFieldHtml(),
 			'type'              => $this->elementType,
-			'elementMethod'		=> $this->elementMethod,
 			'settings'          => $this->getSettings(),
 			'elementSelect' => $this->getElementSelectTemplateVariables(),
 			'label'        => $this->getOptionsSettingsLabel(),
@@ -113,6 +112,17 @@ abstract class ElementOptions_BaseOptionsFieldType extends BaseOptionsFieldType
 		);
 
 		return craft()->templates->render('elementoptions/_components/fieldtypes/BaseElementOptions/settings', $templateVars);
+	}
+
+	protected function getOptions()
+	{
+		$options = parent::getOptions();
+
+		foreach ($options as &$option) {
+			$option['element'] = $this->getElementCriteria($option['element']);
+		}
+
+		return $options;
 	}
 
 	protected function getElementSelectTemplateVariables($criteria = false)
@@ -155,7 +165,7 @@ abstract class ElementOptions_BaseOptionsFieldType extends BaseOptionsFieldType
 				foreach ($value as &$val)
 				{
 					$data = $this->getOptionData($val);
-					$val = new ElementOptions_OptionData($data['label'], $val, true, $this->elementType, $data['element']);
+					$val = new ElementOptions_OptionData($data['label'], $val, true, $data['element']);
 				}
 			}
 			else
@@ -169,7 +179,7 @@ abstract class ElementOptions_BaseOptionsFieldType extends BaseOptionsFieldType
 		{
 			// Convert the value to a ElementOptions_SingleOptionFieldData object
 			$data = $this->getOptionData($value);
-			$value = new ElementOptions_SingleOptionFieldData($data['label'], $value, true, $this->elementType, $data['element']);
+			$value = new ElementOptions_SingleOptionFieldData($data['label'], $value, true, $data['element']);
 		}
 
 		$options = array();
@@ -177,12 +187,19 @@ abstract class ElementOptions_BaseOptionsFieldType extends BaseOptionsFieldType
 		foreach ($this->getOptions() as $option)
 		{
 			$selected = in_array($option['value'], $selectedValues);
-			$options[] = new ElementOptions_OptionData($option['label'], $option['value'], $selected, $this->elementType, $data['element']);
+			$options[] = new ElementOptions_OptionData($option['label'], $option['value'], $selected, $option['element']);
 		}
 
 		$value->setOptions($options);
 
 		return $value;
+	}
+
+	public function getElementCriteria($elementIds)
+	{
+		$criteria = craft()->elements->getCriteria($this->elementType);
+		$criteria->id = $elementIds;
+		return $criteria;
 	}
 
 	/**

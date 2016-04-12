@@ -15,7 +15,6 @@ class ElementOptions_AssetOptionsFieldType extends ElementOptions_BaseOptionsFie
 	// =========================================================================
 	protected $allowLargeThumbsView = true;
 	protected $elementType = 'Asset';
-	protected $elementMethod = 'assets';
 	protected $inputJsClass = 'Craft.AssetSelectInput';
 
 	// Public Methods

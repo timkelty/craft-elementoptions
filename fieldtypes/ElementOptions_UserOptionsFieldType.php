@@ -15,7 +15,6 @@ class ElementOptions_UserOptionsFieldType extends ElementOptions_BaseOptionsFiel
 	// =========================================================================
 	protected $allowLargeThumbsView = true;
 	protected $elementType = 'User';
-	protected $elementMethod = 'users';
 	protected $inputJsClass = 'Craft.BaseElementSelectInput';
 
 	// Public Methods

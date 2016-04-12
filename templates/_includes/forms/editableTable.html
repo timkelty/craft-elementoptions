@@ -26,7 +26,7 @@
 							{% include "_includes/forms/elementSelect" with elementSelect|merge({
 								id: rowId~'-'~col.type,
 								name: cellName,
-								elements: value and elementMethod ? attribute(craft, elementMethod, [{ id: value}]) : null,
+								elements: value|default(null),
 							}) only %}
 						{%- elseif col.type == 'checkbox' -%}
 							<input type="hidden" name="{{ cellName }}">

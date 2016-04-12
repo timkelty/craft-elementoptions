@@ -33,26 +33,12 @@ class ElementOptions_OptionData extends OptionData
 	 *
 	 * @return OptionData
 	 */
-	public function __construct($label, $value, $selected, $elementType, $elementIds)
+	public function __construct($label, $value, $selected, $elementCriteria)
 	{
-		$criteria = $this->getElementCriteria($elementType, $elementIds);
-		$obj = array('element' => $criteria->first());
+		$obj = array('element' => $elementCriteria->first());
 		$this->label    = craft()->templates->renderObjectTemplate($label, $obj);
 		$this->value    = craft()->templates->renderObjectTemplate($value, $obj);
-		$this->element  = $criteria;
+		$this->element = $elementCriteria;
 		$this->selected = $selected;
 	}
-
-	/**
-	 * Returns the options.
-	 *
-	 * @return array|null
-	 */
-	public function getElementCriteria($elementType, $elementIds)
-	{
-		$criteria = craft()->elements->getCriteria($elementType);
-		$criteria->id = $elementIds;
-		return $criteria;
-	}
-
 }
