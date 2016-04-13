@@ -86,7 +86,7 @@ abstract class ElementOptions_BaseOptionsFieldType extends BaseOptionsFieldType
 			'settings'          => $this->getSettings(),
 			'elementSelect'     => $this->getElementSelectTemplateVariables(),
 			'label'             => $this->getOptionsSettingsLabel(),
-			'instructions'      => Craft::t('Define the available options.'),
+			'instructions'      => Craft::t('Define the available options. **Option Label** and **Value** may contain tags that reference the selected entry, such as `{title}` or `{slug}`.'),
 			'id'                => 'options',
 			'name'              => 'options',
 			'addRowLabel'       => Craft::t('Add an option'),
