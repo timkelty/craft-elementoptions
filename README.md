@@ -5,6 +5,9 @@ Each element type is supported with it's own fieldtype: Assets, Users, Entries, 
 
 ![Screenshot](resources/img/screenshots/field-input.png)
 
+## Why
+The intital need for this plugin was to create a "layout selection" field. While a [radio buttons](https://craftcms.com/docs/radio-buttons-fields) field would do the trick, we wanted to be able to show a selectable image instead of a checkbox and text.
+
 The most applicable element type is Assets, as it allows you to create a field where users can select from a pre-defined set of Assets.
 
 ## Installation
