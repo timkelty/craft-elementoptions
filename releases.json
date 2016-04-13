@@ -1,6 +1,14 @@
 [
     {
-        "version": "1.0.0",
+        "version": "1.0.2",
+        "downloadUrl": "https://github.com/timkelty/elementoptions/archive/1.0.2.zip",
+        "date": "2016-04-13T19:49:35Z",
+        "notes": [
+            "[Improved] Changes to object template parsing"
+        ]
+    },
+    {
+        "version": "1.0",
         "downloadUrl": "https://github.com/timkelty/elementoptions/archive/1.0.zip",
         "date": "2016-04-06T18:51:11.384Z",
         "notes": [
