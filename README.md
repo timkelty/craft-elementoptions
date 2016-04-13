@@ -19,14 +19,14 @@ ElementOptions works on Craft 2.4.x and Craft 2.5.x.
 ## Settings
 ![Screenshot](resources/img/screenshots/field-settings.png)
 
-See Craft Docs for Checkboxes Fields: [Settings](https://craftcms.com/docs/checkboxes-fields#settings).
+See [Craft Docs for Checkboxes Fields / Settings](https://craftcms.com/docs/checkboxes-fields#settings).
 
 - Limit the number of selectable options
 - Select an element for each option, and how that element will be displayed (thumbnails, label, checkbox)
 - **Option Label** and **Value** may contain tags that reference the selected entry, such as `{title}` or `{slug}`. This can be useful if you want the label/value to change with element, and vice-versa.
 
 ### Templating
-See Craft Docs for Checkboxes Fields: [Templating](https://craftcms.com/docs/checkboxes-fields#templating).
+See [Craft Docs for Checkboxes Fields / Templating](https://craftcms.com/docs/checkboxes-fields#templating).
 
 - `option.element` is available. It will return an `ElementCriteriaModel`.
 
