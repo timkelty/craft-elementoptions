@@ -7,6 +7,8 @@ Each element type is supported with it's own fieldtype: Assets, Users, Entries, 
 
 The most applicable element type is Assets, as it allows you to create a field where users can select from a pre-defined set of Assets.
 
+![Screenshot](resources/img/screenshots/field-input-2.png)
+
 ## Installation
 1. Download & unzip the file and place the `elementoptions` directory into your `craft/plugins` directory
 2.  -OR- do a `git clone https://github.com/timkelty/elementoptions.git` directly into your `craft/plugins` folder.  You can then update it with `git pull`
