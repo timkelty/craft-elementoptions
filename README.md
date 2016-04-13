@@ -8,11 +8,9 @@ Each element type is supported with it's own fieldtype: Assets, Users, Entries, 
 The most applicable element type is Assets, as it allows you to create a field where users can select from a pre-defined set of Assets.
 
 ## Installation
-1. Download & unzip the file and place the `elementoptions` directory into your `craft/plugins` directory
-2.  _OR_ do a `git clone https://github.com/timkelty/elementoptions.git` directly into your `craft/plugins` folder.  You can then update it with `git pull`
-3.  _OR_ install with Composer via `composer require timkelty/craft-elementoptions`
-3. Install plugin in the Craft Control Panel under Settings > Plugins
-4. The plugin folder should be named `elementoptions` for Craft to see it.
+- Via Composer: `composer require timkelty/craft-elementoptions`
+- Git: `git clone https://github.com/timkelty/craft-elementoptions.git craft/plugins/elementoptions`
+- Download & unzip the into `craft/plugins/elementoptions` directory
 
 ElementOptions works on Craft 2.4.x and Craft 2.5.x.
 
