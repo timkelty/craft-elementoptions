@@ -1,6 +1,6 @@
 # ElementOptions plugin for Craft CMS
 
-ElementOptions fieldtypes function similar to the native "Checkboxes" or "Radio Buttons" fieldtypes, with the addition of a selected element to each option.
+ElementOptions fieldtypes function similar to the native [Checkboxes](https://craftcms.com/docs/checkboxes-fields) fieldtypes, with the addition of a selected element to each option.
 Each element type is supported with it's own fieldtype: Assets, Users, Entries, and Categories.
 
 ![Screenshot](resources/img/screenshots/field-input.png)
