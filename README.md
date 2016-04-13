@@ -1,20 +1,21 @@
 # ElementOptions plugin for Craft CMS
 
-ElementOptions fieldtypes function similar to the native "Checkboxes" or "Radio Buttons" fieldtypes, with the addition of a selected element to each option.
+ElementOptions fieldtypes function similar to the native [Checkboxes](https://craftcms.com/docs/checkboxes-fields) fieldtypes, with the addition of a selected element to each option.
 Each element type is supported with it's own fieldtype: Assets, Users, Entries, and Categories.
 
 ![Screenshot](resources/img/screenshots/field-input.png)
+
+## Why
+The intital need for this plugin was to create a "layout selection" field. While a [radio buttons](https://craftcms.com/docs/radio-buttons-fields) field would do the trick, we wanted to be able to show a selectable image instead of a checkbox and text.
 
 The most applicable element type is Assets, as it allows you to create a field where users can select from a pre-defined set of Assets.
 
 ![Screenshot](resources/img/screenshots/field-input-2.png)
 
 ## Installation
-1. Download & unzip the file and place the `elementoptions` directory into your `craft/plugins` directory
-2.  -OR- do a `git clone https://github.com/timkelty/elementoptions.git` directly into your `craft/plugins` folder.  You can then update it with `git pull`
-3.  -OR- install with Composer via `composer require timkelty/craft-elementoptions`
-3. Install plugin in the Craft Control Panel under Settings > Plugins
-4. The plugin folder should be named `elementoptions` for Craft to see it.
+- Via Composer: `composer require timkelty/craft-elementoptions`
+- Git: `git clone https://github.com/timkelty/craft-elementoptions.git craft/plugins/elementoptions`
+- Download & unzip the into `craft/plugins/elementoptions` directory
 
 ElementOptions works on Craft 2.4.x and Craft 2.5.x.
 
