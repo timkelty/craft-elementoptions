@@ -4,7 +4,7 @@
  * @copyright Copyright (c) 2016 Tim Kelty
  * @link      http://fusionary.com/
  * @package   ElementOptions
- * @since     1.0.0
+ * @since     1.0.2
  */
 
 namespace Craft;
@@ -72,7 +72,7 @@ class ElementOptionsPlugin extends BasePlugin
      */
     public function getVersion()
     {
-        return '1.0.0';
+        return '1.0.2';
     }
 
     /**
@@ -85,7 +85,7 @@ class ElementOptionsPlugin extends BasePlugin
      */
     public function getSchemaVersion()
     {
-        return '1.0.0';
+        return '1.0.2';
     }
 
     /**
