@@ -1,5 +1,13 @@
 [
     {
+        "version": "1.0.3",
+        "downloadUrl": "https://github.com/timkelty/elementoptions/archive/1.0.3.zip",
+        "date": "2016-05-24T16:57:36Z",
+        "notes": [
+            "[Fixed] Style fix for Craft 2.6.2788"
+        ]
+    },
+    {
         "version": "1.0.2",
         "downloadUrl": "https://github.com/timkelty/elementoptions/archive/1.0.2.zip",
         "date": "2016-04-13T19:49:35Z",
