@@ -37,7 +37,7 @@ ElementSelect.prototype = {
   setState: function(el, state) {
     state = state === undefined ? this.isSelected(el) : state;
     $(el).find('.ElementSelect-input').prop('checked', state);
-    $(el).toggleClass('sel', state);
+    $(el).find('.element').toggleClass('sel', state);
   },
 
   setStates: function(el, state) {
