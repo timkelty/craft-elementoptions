@@ -18,7 +18,7 @@ class ElementOptionsPlugin extends BasePlugin
      */
     public function init()
     {
-        Craft::import('plugins.elementoptions.fieldtypes.*');
+        Craft::import('plugins.elementoptions.fieldtypes.ElementOptions_BaseOptionsFieldType');
     }
 
     /**
@@ -28,7 +28,7 @@ class ElementOptionsPlugin extends BasePlugin
      */
     public function getName()
     {
-         return Craft::t('Element Options');
+        return Craft::t('Element Options');
     }
 
     /**
